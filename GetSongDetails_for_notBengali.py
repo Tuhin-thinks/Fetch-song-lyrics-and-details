@@ -1,7 +1,10 @@
+import shutil
 import os
 import scrap_google_search_links_practice
 import requests
 from bs4 import BeautifulSoup
+
+from modules.search import PatternFinder
 
 url = ''
 
@@ -11,7 +14,35 @@ def write_in_file(file_path, note_line):
         file_01.write(note_line)
 
 
-def find_details(write_perm):  # gets the write permission
+def find_details(write_perm):
+    global url
+    # if 'genius.com' in url:
+    #     find_details_(write_perm)
+    #     return
+
+    cwd = os.getcwd()
+    file_path = os.getcwd()
+    folder_name = url.split('/')[-1].strip().strip('\n')  # create name of folder to store details
+
+    write_folder = os.path.join(cwd, folder_name)
+
+    if write_perm and os.path.exists(write_folder) is False:
+        os.mkdir(folder_name)
+        file_path = os.path.join(write_folder, 'song_lyrics_and_details.txt')
+    elif write_perm and os.path.exists(write_folder) is True:
+        shutil.rmtree(write_folder)
+        os.mkdir(folder_name)
+        file_path = os.path.join(write_folder, 'song_lyrics_and_details.txt')
+
+    p = PatternFinder(url=url, pattern_to_search='div', x=10)
+    match_ = p.find_match(auto_purify=True, save_raw=False)
+    if match_:
+        p.save_(text=match_, filename=file_path)
+    else:
+        print("No song details found. for url:"+url)
+
+
+def find_details_(write_perm):  # gets the write permission
     # to fool the web page by emulating search request as from fire-fox browser
     global url
     file_path = ''

@@ -36,9 +36,6 @@ def main():
     soup = BeautifulSoup(data, 'html5lib')  # decoding the data into html format
     print(web_page.status_code)  # this is to confirm if the link allows scraping!
 
-    # html = soup.prettify()  # used to print the source of the page using html formatting
-    # print(html)  # this is useful when you have to figure out which part you have to extract
-
     link_list = []  # a list containing all the links for the search
     link = soup.find_all('div')
 
