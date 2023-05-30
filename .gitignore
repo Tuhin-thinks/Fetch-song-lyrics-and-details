@@ -3,3 +3,6 @@ __pycache__
 
 *.txt
 *.html
+
+# folder where all search results get saved
+search_results
