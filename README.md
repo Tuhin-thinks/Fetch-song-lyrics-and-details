@@ -25,6 +25,6 @@ Though this is not the final version.
 
 I will be upgrading it for more websites to fetch lyrics for more websites.
 
-## EXample:
+## Example:
 
 You'll have to enter some <songname> genius.com then you'll be guided by the program till the last step to finally save the lyrics in a text file.
